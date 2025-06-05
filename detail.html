@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Loading</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="css/detail.css">
+</head>
+<body>
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <div class="container">
+        <!-- Story Header will be populated by JavaScript -->
+        <div class="story-header" id="story-header">
+            <!-- Content will be dynamically loaded -->
+        </div>
+
+        <!-- Story Summary -->
+        <div class="story-summary" id="story-summary">
+            <h2 class="section-title">Tóm tắt nội dung</h2>
+            <p id="story-description">Loading...</p>
+        </div>
+
+        <!-- Chapters -->
+        <div class="chapters-section" id="chapters-section">
+            <h2 class="section-title">Mục lục (<span id="chapter-count">0</span> chương)</h2>
+            <div class="chapters-grid" id="chapters-list">
+                <!-- Chapters will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section" id="comments-section">
+            <h2 class="section-title">Bình luận & Đánh giá</h2>
+            
+            <div class="rating-input">
+                <span>Đánh giá của bạn:</span>
+                <div class="stars" id="user-rating">
+                    <span class="star" onclick="setRating(1)">★</span>
+                    <span class="star" onclick="setRating(2)">★</span>
+                    <span class="star" onclick="setRating(3)">★</span>
+                    <span class="star" onclick="setRating(4)">★</span>
+                    <span class="star" onclick="setRating(5)">★</span>
+                </div>
+            </div>
+
+            <div class="comment-form">
+                <textarea id="comment-text" placeholder="Viết bình luận của bạn..."></textarea>
+                <button class="btn btn-primary" onclick="submitComment()">Gửi bình luận</button>
+            </div>
+
+            <div id="comments-list">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/detail.js"></script>
+</body>
+</html>

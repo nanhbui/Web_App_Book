@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - AVOCADOIE</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="css/register.css">
+
+</head>
+<body>
+    <div class="register-container">
+        <div class="logo-section">
+            <div class="logo"></div>
+            <div class="logo-text">AVOCADOIE</div>
+            <div class="subtitle">Tạo tài khoản mới</div>
+        </div>
+
+        <div class="server-error" id="serverError"></div>
+
+        <form class="register-form">
+            <div class="form-group">
+                <label class="form-label" for="username">Tên đăng nhập</label>
+                <input type="text" id="username" class="form-input" placeholder="Nhập tên đăng nhập" required>
+                <div class="error-message" id="username-error">Tên đăng nhập phải có ít nhất 3 ký tự</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="Nhập địa chỉ email" required>
+                <div class="error-message" id="email-error">Vui lòng nhập email hợp lệ</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Mật khẩu</label>
+                <input type="password" id="password" class="form-input" placeholder="Nhập mật khẩu" required>
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strength-bar"></div>
+                </div>
+                <div class="error-message" id="password-error">Mật khẩu phải có ít nhất 6 ký tự</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="confirm-password">Xác nhận mật khẩu</label>
+                <input type="password" id="confirm-password" class="form-input" placeholder="Nhập lại mật khẩu" required>
+                <div class="error-message" id="confirm-error">Mật khẩu xác nhận không khớp</div>
+            </div>
+
+            <button type="submit" class="register-btn" id="registerBtn">
+                <span class="loading-spinner" id="loadingSpinner"></span>
+                <span id="btnText">Đăng ký</span>
+            </button>
+        </form>
+
+        <div class="login-link">
+            Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+        </div>
+    </div>
+
+    <!-- Modal thông báo thành công -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon"></div>
+            <h2 class="modal-title">Đăng ký thành công!</h2>
+            <p class="modal-message">
+                Tài khoản của bạn đã được tạo thành công.<br>
+                Đang chuyển hướng về trang đăng nhập...
+            </p>
+            <div class="countdown" id="countdown">3</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thông báo lỗi -->
+    <div class="modal-overlay" id="errorModal">
+        <div class="modal-content">
+            <div class="error-icon"></div>
+            <h2 class="modal-title">Đăng ký thất bại!</h2>
+            <p class="modal-message" id="errorMessage">
+                Đã có lỗi xảy ra trong quá trình đăng ký.
+            </p>
+            <button class="close-btn" onclick="closeErrorModal()">Đóng</button>
+        </div>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+</html>

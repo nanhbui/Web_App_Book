@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Khoản - AVOCADOIE</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/account.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="account-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="components/images/user1.png" alt="Avatar" class="user-avatar" id="sidebarAvatar">
+                <h3 id="sidebarUsername">Đang tải...</h3>
+                <p id="sidebarJoinDate">Thành viên từ: Đang tải...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="account-info">Thông tin tài khoản</a>
+                <a href="#" class="nav-item" data-section="reading-history">Lịch sử đọc</a>
+                <a href="#" class="nav-item" data-section="favorites">Truyện yêu thích</a>
+                <a href="#" class="nav-item" data-section="change-password">Đổi mật khẩu</a>
+            </nav>
+            
+            <button class="admin-btn" id="adminBtn" onclick="goToAdmin()" style="display: none;">
+                Admin
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <!-- Thông tin tài khoản -->
+            <section class="section active" id="account-info">
+                <h2 class="section-title">Thông tin tài khoản</h2>
+                <div class="account-info">
+                    <img src="components/images/user1.png" alt="Avatar" class="account-avatar" id="mainAvatar">
+                    <div class="account-details">
+                        <h3 id="mainUsername">Đang tải...</h3>
+                        <p><strong>Email:</strong> <span id="userEmail">Đang tải...</span></p>               
+                        <p><strong>Truyện yêu thích:</strong> <span id="favoriteCount">0</span></p>
+                    </div>
+                    <button class="btn" onclick="openEditProfile()">Chỉnh sửa hồ sơ</button>
+                </div>
+            </section>
+
+            <!-- Lịch sử đọc -->
+            <section class="section" id="reading-history">
+                <h2 class="section-title">Lịch sử đọc</h2>
+                <div class="story-grid" id="historyGrid">
+                    <p>Đang tải lịch sử đọc...</p>
+                </div>
+                <div class="pagination" id="historyPagination"></div>
+            </section>
+
+            <!-- Truyện yêu thích -->
+            <section class="section" id="favorites">
+                <h2 class="section-title">Truyện yêu thích</h2>
+                <div class="story-grid" id="favoritesGrid">
+                    <p>Đang tải truyện yêu thích...</p>
+                </div>
+                <div class="pagination" id="favoritesPagination"></div>
+            </section>
+
+            <!-- Đổi mật khẩu -->
+            <section class="section" id="change-password">
+                <h2 class="section-title">Đổi mật khẩu</h2>
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Mật khẩu hiện tại:</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Mật khẩu mới:</label>
+                        <input type="password" id="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn">Đổi mật khẩu</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal chỉnh sửa hồ sơ -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEditProfile()">&times;</span>
+            <h3>Chỉnh sửa hồ sơ</h3>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editUsername">Tên đăng nhập:</label>
+                    <input type="text" id="editUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="avatarFile">Ảnh đại diện:</label>
+                    <input type="file" id="avatarFile" accept="image/jpeg, image/png, image/webp">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditProfile()">Hủy</button>
+                    <button type="submit" class="btn">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer-placeholder">FOOTER - © 2025 Avocadoie</div>
+
+    <script src="js/account.js"></script>
+</body>
+</html>

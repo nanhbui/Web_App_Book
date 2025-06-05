@@ -1,0 +1,480 @@
+<!-- header.html -->
+<header class="main-header">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --avocado-green: #6B8E23;
+      --avocado-light: #9ACD32;
+      --avocado-cream: #F5F5DC;
+      --avocado-dark: #556B2F;
+      --avocado-bg: #FAFDF7;
+      --text-dark: #2D3748;
+      --text-muted: #718096;
+      --border-light: #E2E8F0;
+      --shadow: 0 6px 25px rgba(107, 142, 35, 0.12);
+      --shadow-hover: 0 8px 30px rgba(107, 142, 35, 0.18);
+    }
+
+    .main-header {
+      background: linear-gradient(135deg, var(--avocado-cream) 0%, #F8FAF5 100%);
+      border-bottom: 3px solid var(--avocado-green);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: 'Comfortaa', sans-serif;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      min-height: 75px;
+    }
+
+    /* Logo Section */
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--avocado-green) 0%, var(--avocado-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 15px rgba(107, 142, 35, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .logo-icon:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .logo-text {
+      font-family: 'Comfortaa', cursive;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--avocado-dark);
+      text-decoration: none;
+      letter-spacing: -0.8px;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, var(--avocado-dark) 0%, var(--avocado-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-text:hover {
+      transform: translateX(3px);
+    }
+
+    /* Search Container - Giữa */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      max-width: 500px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 1rem 1.5rem 1rem 3.5rem;
+      border-radius: 30px;
+      border: 2px solid var(--avocado-light);
+      font-size: 1rem;
+      font-weight: 400;
+      background: white;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Comfortaa', sans-serif;
+      box-shadow: 0 2px 10px rgba(107, 142, 35, 0.08);
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: var(--avocado-green);
+      box-shadow: 0 0 0 4px rgba(107, 142, 35, 0.12), 0 4px 20px rgba(107, 142, 35, 0.15);
+    }
+
+    .search-box::placeholder {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-family: 'Comfortaa', sans-serif;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--avocado-green);
+      font-size: 1.2rem;
+      z-index: 10;
+    }
+
+    /* Search Results Dropdown */
+    .search-results {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: white;
+      border: 2px solid var(--avocado-light);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(107, 142, 35, 0.15);
+      display: none;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .search-results::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-left: 2px solid var(--avocado-light);
+      border-top: 2px solid var(--avocado-light);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .search-result-item:hover {
+      background: linear-gradient(135deg, var(--avocado-bg) 0%, #F0F8E8 100%);
+      transform: translateX(5px);
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-cover {
+      width: 60px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid var(--border-light);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+    }
+
+    .search-result-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .search-result-title {
+      font-weight: 600;
+      font-family: 'Comfortaa', sans-serif;
+      color: var(--avocado-dark);
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-author {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 400;
+      font-family: 'Comfortaa', sans-serif;
+    }
+
+    .search-loading {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: 'Comfortaa', sans-serif;
+    }
+
+    .search-no-results {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: 'Comfortaa', sans-serif;
+    }
+
+    /* Loading animation */
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-light);
+      border-radius: 50%;
+      border-top-color: var(--avocado-green);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Navigation - Bên phải */
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+      justify-self: end;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--avocado-dark);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 25px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Comfortaa', sans-serif;
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid transparent;
+      backdrop-filter: blur(5px);
+    }
+
+    .nav-link:hover {
+      background: var(--avocado-green);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(107, 142, 35, 0.3);
+      border-color: var(--avocado-light);
+    }
+
+    .nav-link span:first-child {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+      font-family: 'Comfortaa', sans-serif;
+    }
+
+    .nav-link:hover span:first-child {
+      transform: scale(1.1);
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: white;
+      border: 2px solid var(--avocado-light);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(107, 142, 35, 0.15);
+      display: none;
+      min-width: 200px;
+      z-index: 1000;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .dropdown::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: 20px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-left: 2px solid var(--avocado-light);
+      border-top: 2px solid var(--avocado-light);
+      transform: rotate(45deg);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: var(--avocado-dark);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-family: 'Comfortaa', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .dropdown-item:hover {
+      background: linear-gradient(135deg, var(--avocado-bg) 0%, #F0F8E8 100%);
+      color: var(--avocado-green);
+      transform: translateX(5px);
+    }
+
+    .dropdown-item:not(:last-child) {
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .header-container {
+        grid-template-columns: auto 1fr auto;
+        gap: 1.5rem;
+        padding: 1rem 1.5rem;
+      }
+
+      .search-container {
+        max-width: 400px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .logo-section {
+        justify-self: center;
+        grid-row: 1;
+      }
+
+      .search-container {
+        grid-row: 2;
+        max-width: 100%;
+      }
+
+      .header-nav {
+        grid-row: 3;
+        justify-self: center;
+        gap: 0.8rem;
+      }
+
+      .nav-link {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+        font-family: 'Comfortaa', sans-serif;
+
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+        font-family: 'Comfortaa', sans-serif;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .dropdown {
+        position: static;
+        box-shadow: none;
+        border: none;
+        border-top: 2px solid var(--avocado-light);
+        border-radius: 0;
+        margin-top: 0.5rem;
+      }
+
+      .dropdown::before {
+        display: none;
+      }
+
+      .search-results {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        top: auto;
+        max-height: 300px;
+      }
+    }
+
+    /* Animation cho logo */
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .logo-icon {
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+  </style>
+
+  <div class="header-container">
+    <!-- Logo - Bên trái -->
+    <div class="logo-section">
+      <div class="logo-icon">🥑</div>
+      <a href="index.html" class="logo-text">AVOCADOIE</a>
+    </div>
+
+    <!-- Search - Giữa -->
+    <div class="search-container">
+      <span class="search-icon"><img src="components/images/loupe.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;"></span>
+      <input type="text" class="search-box" placeholder="Tìm kiếm truyện, tác giả..." id="search-input">
+      
+      <div class="search-results" id="search-results">
+        <!-- Search results will be populated here -->
+      </div>
+    </div>
+
+    <!-- Navigation - Bên phải -->
+    <nav class="header-nav">
+      <a href="genres.html" class="nav-link">
+        <img src="components/images/menu.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;">
+        <span>Thể loại</span>
+      </a>
+      <div class="nav-item">
+        <a href="#" class="nav-link" id="account-link">
+           <img src="components/images/menus.png" alt="logout" style="width: 20px; height: 20px;">
+        </a>
+        <div class="dropdown">
+          <a href="account.html" class="dropdown-item">
+            <img src="components/images/user.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;">
+            <span>Tài khoản</span>
+          </a>
+          <a href="#" class="dropdown-item" onclick="logout()">
+            <img src="components/images/turnoff.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;">
+            <span>Đăng xuất</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>

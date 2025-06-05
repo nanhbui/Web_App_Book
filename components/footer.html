@@ -1,0 +1,446 @@
+<!-- footer.html -->
+<footer class="main-footer">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --avocado-green: #6B8E23;
+      --avocado-light: #9ACD32;
+      --avocado-cream: #F5F5DC;
+      --avocado-dark: #556B2F;
+      --avocado-bg: #FAFDF7;
+      --text-dark: #2D3748;
+      --text-muted: #718096;
+      --border-light: #E2E8F0;
+      --shadow: 0 4px 20px rgba(107, 142, 35, 0.1);
+    }
+
+    .main-footer {
+      background: var(--avocado-cream);
+      border-top: 3px solid var(--avocado-green);
+      padding: 2.5rem 0 1.5rem 0;
+      margin-top: 4rem;
+      text-align: center;
+      font-family: 'Comfortaa', sans-serif;
+      z-index: 100;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-logo {
+      width: 35px;
+      height: 35px;
+      background: var(--avocado-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(107, 142, 35, 0.3);
+    }
+
+    .footer-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--avocado-dark);
+      letter-spacing: -0.5px;
+    }
+
+    .footer-description {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .footer-contact {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-contact span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact span:hover {
+      color: var(--avocado-green);
+    }
+
+    /* Feedback Button */
+    .feedback-button {
+      background: var(--avocado-green);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-family: 'Comfortaa', cursive;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.5px;
+    }
+
+    .feedback-button:hover {
+      background: var(--avocado-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(107, 142, 35, 0.2);
+    }
+
+    .footer-copyright {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Comfortaa';
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+      animation: slideIn 0.3s ease;
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    .modal-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--avocado-dark);
+      margin: 0;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 5px;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-button:hover {
+      background: var(--border-light);
+      color: var(--avocado-green);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border-light);
+      border-radius: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--avocado-green);
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border-light);
+      border-radius: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      min-height: 120px;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--avocado-green);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .checkbox-item:hover {
+      background: var(--avocado-bg);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--avocado-green);
+    }
+
+    .checkbox-item label {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--avocado-green);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--avocado-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--border-light);
+      color: var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text-muted);
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .footer-contact {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .footer-brand {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .main-footer {
+        padding: 2rem 0 1rem 0;
+      }
+
+      .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      .form-buttons {
+        flex-direction: column;
+      }
+
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div class="footer-logo">🥑</div>
+      <div class="footer-title">AVOCADOIE</div>
+    </div>
+    
+    <p class="footer-description">Website đọc truyện online miễn phí</p>
+    
+    <div class="footer-contact">
+      <span>📧 contact@avocadoie.com</span>
+      <span>📞 0852422004</span>
+      <span>🌐 www.avocadoie.com</span>
+    </div>
+
+    <button class="feedback-button" onclick="openFeedbackModal()">
+      Gửi ý kiến
+    </button>
+    
+    <div class="footer-copyright">
+      © 2025 Avocadoie - Được phát triển với ❤️
+    </div>
+  </div>
+</footer>
+
+<!-- Feedback Modal -->
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Gửi ý kiến</h2>
+      <button class="close-button" onclick="closeFeedbackModal()">&times;</button>
+    </div>
+    
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label class="form-label" for="userName">Tên đăng nhập *</label>
+        <input type="text" id="userName" name="userName" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="userEmail">Email *</label>
+        <input type="email" id="userEmail" name="userEmail" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+  <label class="form-label">Loại ý kiến *</label>
+  <div class="checkbox-group">
+    <div class="checkbox-item">
+      <input type="radio" id="bugStory" name="feedbackType" value="Báo lỗi truyện/Chương truyện">
+      <label for="bugStory">Báo lỗi truyện/Chương truyện</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="radio" id="bugInterface" name="feedbackType" value="Báo lỗi giao diện">
+      <label for="bugInterface">Báo lỗi giao diện</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="radio" id="suggestion" name="feedbackType" value="Đề xuất">
+      <label for="suggestion">Đề xuất</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="radio" id="experience" name="feedbackType" value="Đóng góp trải nghiệm">
+      <label for="experience">Đóng góp trải nghiệm</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="radio" id="other" name="feedbackType" value="Khác">
+      <label for="other">Khác</label>
+    </div>
+  </div>
+</div>
+
+      <div class="form-group">
+        <label class="form-label" for="feedbackTitle">Tiêu đề *</label>
+        <input type="text" id="feedbackTitle" name="feedbackTitle" class="form-input" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="feedbackContent">Nội dung *</label>
+        <textarea id="feedbackContent" name="feedbackContent" class="form-textarea" 
+                  placeholder="Vui lòng mô tả chi tiết ý kiến của bạn..." required></textarea>
+      </div>
+
+      <div class="form-buttons">
+        <button type="button" class="btn btn-secondary" onclick="closeFeedbackModal()" style="font-family: Comfortaa;">Hủy</button>
+        <button type="submit" class="btn btn-primary" style="font-family: Comfortaa;">Gửi ý kiến</button>
+      </div>
+    </form>
+  </div>
+</div>

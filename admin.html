@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="css/admin.css">
+ 
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <div class="admin-container">
+        <div class="sidebar">
+            <h2> Admin Panel</h2>
+            <div class="nav-item1 active" onclick="showSection('dashboard')"><img src="components/images/analytics.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;"> Tổng quan</div>
+            <div class="nav-item1" onclick="showSection('stories')"><img src="components/images/open-book.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;"> Quản lý truyện</div>
+            <div class="nav-item1" onclick="showSection('ads')"><img src="components/images/tv-monitor.png" alt="logout" style="width: 16px; height: 16px; margin-right: 8px;"> Quản lý quảng cáo</div>
+            <div class="nav-item1" onclick="showSection('users')"><img src="components/images/users.png" alt="logout" style="width: 20px; height: 20px; margin-right: 8px; "> Quản lý tài khoản</div>
+            <div class="nav-item1" onclick="showSection('feedback')"><img src="components/images/ratings.png" alt="feedback" style="width: 16px; height: 16px; margin-right: 8px;"> Feedback</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="page-section active">
+                <h1>Tổng quan hệ thống</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Tổng số truyện</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Người dùng</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Lượt xem hôm nay</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Bình luận mới</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stories Management Section -->
+            <div id="stories" class="page-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>📖 Quản lý truyện</h2>
+                    </div>
+                    
+                    <input type="text" class="search-box1" placeholder="🔍 Tìm kiếm truyện..." onkeyup="filterStories(this.value)">
+                    
+                    <table class="table" id="storiesTable">
+                        <thead>
+                            <tr>
+                                <th>Tên truyện</th>
+                                <th>Tác giả</th>
+                                <th>Thể loại</th>
+                                <th>Số chương</th>
+                                <th>Ngày đăng</th>
+                                <th>Cập nhật</th>
+                                <th>Rating</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="storiesTableBody">
+                            <!-- Stories will be populated here -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination" id="storiesPagination">
+                        <!-- Pagination will be generated here -->
+                    </div>
+
+                    <div class = 'add-str-btn'>
+                    <button class="btn btn-primary" onclick="showAddStoryModal()">
+                            <span style="font-size: 18px; font-family: Comfortaa;">+</span> Thêm truyện mới
+                    </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ads Management Section -->
+            <div id="ads" class="page-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>📺 Quản lý quảng cáo</h2>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <input type="text" class="search-box1" placeholder="🔍 Tìm kiếm quảng cáo..." onkeyup="filterAds(this.value)">
+                        
+                        <div class="filter-group">
+                            <label>Vị trí</label>
+                            <select onchange="filterAdsByPosition(this.value)">
+                                <option value="">Tất cả vị trí</option>
+                                <option value="header">Header</option>
+                                <option value="sidebar">Sidebar</option>
+                                <option value="content">Content</option>
+                                <option value="footer">Footer</option>
+                                <option value="popup">Popup</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Trạng thái</label>
+                            <select onchange="filterAdsByStatus(this.value)">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="active">Hoạt động</option>
+                                <option value="paused">Tạm dừng</option>
+                                <option value="expired">Hết hạn</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Loại quảng cáo</label>
+                            <select onchange="filterAdsByType(this.value)">
+                                <option value="">Tất cả loại</option>
+                                <option value="banner">Banner ảnh</option>
+                                <option value="popup">Popup</option>
+                                <option value="video">Video ngắn</option>
+                                <option value="html">HTML tùy chỉnh</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <table class="table" id="adsTable">
+                        <thead>
+                            <tr>
+                                <th>Tên quảng cáo</th>
+                                <th>Vị trí</th>
+                                <th>Loại</th>
+                                <th>Trạng thái</th>
+                                <th>URL đích</th>
+                                <th>Thời gian hiển thị</th>
+                                <th>Tần suất</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Ngày kết thúc</th>
+                                <th>Lượt click</th>
+                                <th>Cập nhật</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adsTableBody">
+                            <!-- Ads will be populated here -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination" id="adsPagination">
+                        <!-- Pagination will be generated here -->
+                    </div>
+                    
+                    <div class="add-ad-btn">
+                        <button class="btn btn-primary" onclick="showAddAdModal()">
+                            <span style="font-size: 18px; font-family: Comfortaa;">+</span> Thêm quảng cáo mới
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Management Section -->
+            <div id="users" class="page-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>👥 Quản lý tài khoản</h2>
+                    </div>
+                    
+                    <input type="text" class="search-box1" placeholder="🔍 Tìm kiếm tài khoản..." onkeyup="filterUsers(this.value)">
+                    
+                    <table class="table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Tên đăng nhập</th>
+                                <th>Email</th>
+                                <th>Quyền</th>
+                                <th>Ngày tạo</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Feedback Management Section -->
+<div id="feedback" class="page-section">
+    <div class="content-card">
+        <div class="card-header">
+            <h2>💬 Feedback</h2>
+        </div>
+        
+        <table class="table" id="feedbackTable">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Loại</th>
+                    <th>Title</th>
+                    <th>Nội dung</th>
+                    <th>Ngày gửi</th>
+                </tr>
+            </thead>
+            <tbody id="feedbackTableBody">
+                <!-- Feedback data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <!-- Story Detail Modal -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('storyModal')">&times;</span>
+            <div id="storyDetailContent">
+                <!-- Story detail content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Story Modal -->
+    <div id="addStoryModal" class="modal add-story-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addStoryModal')">&times;</span>
+            <h3>Thêm truyện mới</h3>
+            <form id="addStoryForm">
+                <div class="form-group">
+                    <label>Tên truyện:</label>
+                    <input type="text" name="title" placeholder="Nhập tên truyện" required>
+                </div>
+                <div class="form-group">
+                    <label>Tác giả:</label>
+                    <input type="text" name="author" placeholder="Nhập tên tác giả" required>
+                </div>
+                <div class="form-group">
+                    <label>Thể loại:</label>
+                    <div class="genre-checkbox-group">
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Tiên hiệp">Tiên hiệp</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Kiếm hiệp">Kiếm hiệp</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Ngôn tình">Ngôn tình</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Đam mỹ (BL)">Đam mỹ (BL)</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Bách hợp (GL)">Bách hợp (GL)</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Trinh thám">Trinh thám</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Kinh dị">Kinh dị</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Huyền huyễn">Huyền huyễn</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Lịch sử">Lịch sử</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Quân sự">Quân sự</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Xuyên không">Xuyên không</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Trọng sinh">Trọng sinh</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Hệ thống">Hệ thống</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Sủng">Sủng</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Ngược">Ngược</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Hài hước">Hài hước</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Học đường">Học đường</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Cung đấu">Cung đấu</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Tổng tài">Tổng tài</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Xuyên thư">Xuyên thư</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Linh dị">Linh dị</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái:</label>
+                    <select name="status">
+                        <option value="Đang tiến hành">Đang tiến hành</option>
+                        <option value="Hoàn thành">Hoàn thành</option>
+                        <option value="Tạm dừng">Tạm dừng</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mô tả:</label>
+                    <textarea name="description" rows="5" placeholder="Nhập mô tả truyện..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Link ảnh bìa:</label>
+                    <input type="file" name="coverImageFile" accept="image/*">
+                    <img id="previewCoverImage" style="margin-top:10px; max-height: 160px; display:none; border-radius: 6px;" />
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm truyện</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Chapter Modal -->
+    <div id="addChapterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addChapterModal')">&times;</span>
+            <h3>Thêm chương mới</h3>
+            <form id="addChapterForm">
+                <div class="form-group">
+                    <label>Tiêu đề chương:</label>
+                    <input type="text" name="chapterTitle" placeholder="VD: Chương 3: Cuộc phiêu lưu" required>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung chương:</label>
+                    <textarea name="chapterContent" rows="15" placeholder="Nhập nội dung chương truyện..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Thứ tự chương:</label>
+                    <textarea name="chapterNote" rows="3" placeholder="Ví dụ: 3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm chương</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Story Modal -->
+    <div id="editStoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editStoryModal')">&times;</span>
+            <h3>Chỉnh sửa thông tin truyện</h3>
+            <form id="editStoryForm">
+                <div class="form-group">
+                    <label>Tên truyện:</label>
+                    <input type="text" name="title" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Tác giả:</label>
+                    <input type="text" name="author" id="editAuthor" required>
+                </div>
+               <div class="form-group">
+                    <label>Thể loại:</label>
+                    <div class="genre-checkbox-group">
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Tiên hiệp">Tiên hiệp</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Kiếm hiệp">Kiếm hiệp</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Ngôn tình">Ngôn tình</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Đam mỹ (BL)">Đam mỹ (BL)</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Bách hợp (GL)">Bách hợp (GL)</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Trinh thám">Trinh thám</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Kinh dị">Kinh dị</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Huyền huyễn">Huyền huyễn</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Lịch sử">Lịch sử</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Quân sự">Quân sự</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Xuyên không">Xuyên không</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Trọng sinh">Trọng sinh</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Hệ thống">Hệ thống</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Sủng">Sủng</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Ngược">Ngược</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Hài hước">Hài hước</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Học đường">Học đường</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Cung đấu">Cung đấu</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Tổng tài">Tổng tài</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Xuyên thư">Xuyên thư</label>
+                    <label class="genre-item"><input type="checkbox" name="genre" value="Linh dị">Linh dị</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Trạng thái:</label>
+                    <select name="status" id="editStatus">
+                        <option value="Đang tiến hành">Đang tiến hành</option>
+                        <option value="Hoàn thành">Hoàn thành</option>
+                        <option value="Tạm dừng">Tạm dừng</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mô tả:</label>
+                    <textarea name="description" id="editDescription" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Link ảnh bìa:</label>
+                    <input type="file" name="coverImageFile" id="coverImageFile" accept="image/*">
+                    <img id="previewCoverImage" style="margin-top:10px; max-height: 160px; display:none; border-radius: 6px;" />
+                </div>
+                <button type="submit" class="btn btn-primary">Cập nhật truyện</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Ad Modal -->
+    <div id="addAdModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addAdModal')">&times;</span>
+            <h3>Thêm quảng cáo mới</h3>
+            <form id="addAdForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tên quảng cáo:</label>
+                        <input type="text" name="adName" placeholder="Nhập tên quảng cáo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Vị trí:</label>
+                        <select name="position" required>
+                            <option value="">Chọn vị trí</option>
+                            <option value="header">Header</option>
+                            <option value="sidebar">Sidebar</option>
+                            <option value="content">Content</option>
+                            <option value="footer">Footer</option>
+                            <option value="popup">Popup</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loại quảng cáo:</label>
+                        <select name="adType" required>
+                            <option value="">Chọn loại</option>
+                            <option value="banner">Banner ảnh</option>
+                            <option value="popup">Popup</option>
+                            <option value="video">Video ngắn</option>
+                            <option value="html">HTML tùy chỉnh</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái:</label>
+                        <select name="status">
+                            <option value="active">Hoạt động</option>
+                            <option value="paused">Tạm dừng</option>
+                            <option value="expired">Hết hạn</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>URL đích/Link liên kết:</label>
+                    <input type="url" name="targetUrl" placeholder="https://example.com" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Thời gian hiển thị (giây):</label>
+                        <input type="number" name="displayTime" placeholder="VD: 10" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Tần suất hiển thị:</label>
+                        <select name="frequency">
+                            <option value="Mỗi phiên truy cập">Mỗi phiên truy cập</option>
+                            <option value="Sau 24 giờ">Sau 24 giờ</option>
+                            <option value="Chỉ 1 lần/cookie">Chỉ 1 lần/cookie</option>
+                            <option value="Luôn hiển thị">Luôn hiển thị</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ngày bắt đầu:</label>
+                        <input type="date" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày kết thúc:</label>
+                        <input type="date" name="endDate" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nội dung quảng cáo:</label>
+                    <textarea name="adContent" rows="8" placeholder="Nhập HTML/nội dung quảng cáo..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Thêm quảng cáo</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editAdModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editAdModal')">&times;</span>
+            <h3>Chỉnh sửa quảng cáo</h3>
+            <form id="editAdForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tên quảng cáo:</label>
+                        <input type="text" name="adName" id="editAdName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Vị trí:</label>
+                        <select name="position" id="editAdPosition" required>
+                            <option value="header">Header</option>
+                            <option value="sidebar">Sidebar</option>
+                            <option value="content">Content</option>
+                            <option value="footer">Footer</option>
+                            <option value="popup">Popup</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loại quảng cáo:</label>
+                        <select name="adType" id="editAdType" required>
+                            <option value="banner">Banner ảnh</option>
+                            <option value="popup">Popup</option>
+                            <option value="video">Video ngắn</option>
+                            <option value="html">HTML tùy chỉnh</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái:</label>
+                        <select name="status" id="editAdStatus">
+                            <option value="active">Hoạt động</option>
+                            <option value="paused">Tạm dừng</option>
+                            <option value="expired">Hết hạn</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>URL đích/Link liên kết:</label>
+                    <input type="url" name="targetUrl" id="editAdTargetUrl" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Thời gian hiển thị (giây):</label>
+                        <input type="number" name="displayTime" id="editAdDisplayTime" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Tần suất hiển thị:</label>
+                        <select name="frequency" id="editAdFrequency">
+                            <option value="Mỗi phiên truy cập">Mỗi phiên truy cập</option>
+                            <option value="Sau 24 giờ">Sau 24 giờ</option>
+                            <option value="Chỉ 1 lần/cookie">Chỉ 1 lần/cookie</option>
+                            <option value="Luôn hiển thị">Luôn hiển thị</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ngày bắt đầu:</label>
+                        <input type="date" name="startDate" id="editAdStartDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày kết thúc:</label>
+                        <input type="date" name="endDate" id="editAdEndDate" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nội dung quảng cáo:</label>
+                    <textarea name="adContent" id="editAdContent" rows="8" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Cập nhật quảng cáo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Preview Ad Modal -->
+    <div id="previewAdModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('previewAdModal')">&times;</span>
+            <h3>Xem trước quảng cáo</h3>
+            <div id="previewAdContent" style="border: 2px dashed var(--border-light); padding: 20px; text-align: center; min-height: 200px;">
+                <!-- Preview content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit chapter -->
+    <div id="editChapterModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('editChapterModal')">&times;</span>
+    <h3>Chỉnh sửa chương</h3>
+    <form id="editChapterForm">
+      <!-- Lưu chapter_id để gửi khi cập nhật -->
+      <input type="hidden" name="chapterId">
+
+      <div class="form-group">
+        <label for="chapterTitle">Tiêu đề chương:</label>
+        <input type="text" id="chapterTitle" name="chapterTitle" required>
+      </div>
+
+      <div class="form-group">
+        <label for="chapterContent">Nội dung:</label>
+        <textarea id="chapterContent" name="chapterContent" rows="12" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="chapterOrder">Thứ tự chương:</label>
+        <input type="number" id="chapterOrder" name="chapterOrder" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    </form>
+  </div>
+</div>
+
+
+<script src="js/admin.js"></script>
+</body>
+</html>

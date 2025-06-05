@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đọc Truyện - AVOCADOIE</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="css/read.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Settings Button -->
+    <button class="settings-btn" id="settingsBtn"><img src="components/images/engineer.png" alt="logout" style="width: 50px; height: 50px;"></button>
+    
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <h3>Tùy chỉnh hiển thị</h3>
+        
+        <div class="setting-group">
+            <label>Cỡ chữ:</label>
+            <input type="range" id="fontSize" min="12" max="24" value="16">
+            <span id="fontSizeValue">16px</span>
+        </div>
+        
+        <div class="setting-group">
+            <label>Kiểu chữ:</label>
+            <select id="fontFamily">
+                <option value="Times New Roman" style="font-family: 'Times New Roman', sans-serif;">Times New Roman</option>
+                <option value="Arial" style="font-family: 'Arial', sans-serif;">Arial</option>
+                <option value="Comfortaa" style="font-family: 'Comfortaa', sans-serif;">Comfortaa</option>
+                <option value="Courier New" style="font-family: 'Courier New', sans-serif;">Courier New</option>
+            </select>
+        </div>
+        
+        <div class="setting-group">
+            <label>Giãn dòng:</label>
+            <input type="range" id="lineHeight" min="1.2" max="2.0" step="0.1" value="1.6">
+            <span id="lineHeightValue">1.6</span>
+        </div>
+        
+        <div class="setting-group">
+            <label>Giao diện:</label>
+            <div class="theme-buttons">
+                <button class="theme-btn active" data-theme="light">Sáng</button>
+                <button class="theme-btn" data-theme="dark">Tối</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Story Header -->
+        <div class="story-header">
+            <h1 class="story-title" id="storyTitle">Tên Truyện</h1>
+            <h2 class="chapter-title" id="chapterTitle">Chương 1: Khởi đầu</h2>
+        </div>
+        
+        <!-- Top Chapter Navigation -->
+        <div class="chapter-nav">
+            <button class="nav-btn prev-chapter-btn">← Chương trước</button>
+            <select class="chapter-select chapter-select-dropdown">
+                <option value="">Đang tải...</option>
+            </select>
+            <button class="nav-btn next-chapter-btn">Chương sau →</button>
+        </div> 
+        
+        <!-- Story Content -->
+        <div class="story-content" id="storyContent">
+            <p>Đang tải nội dung...</p>
+        </div>
+        
+        <!-- Bottom Chapter Navigation -->
+        <div class="chapter-nav">
+            <button class="nav-btn prev-chapter-btn">← Chương trước</button>
+            <select class="chapter-select chapter-select-dropdown">
+                <option value="">Đang tải...</option>
+            </select>
+            <button class="nav-btn next-chapter-btn">Chương sau →</button>
+        </div>
+        
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h3 class="comments-title">Bình luận</h3>
+            
+            <div class="comment-form">
+                <textarea class="comment-input" id="commentInput" placeholder="Viết bình luận của bạn..."></textarea>
+                <button class="comment-submit" id="commentSubmit">Gửi bình luận</button>
+            </div>
+            
+            <div class="comments-list" id="commentsList">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+        <div id="footer-placeholder"></div>
+    </div>
+
+<script src="js/read.js"></script>
+</body>
+</html>

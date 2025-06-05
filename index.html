@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang Chủ - Avocadoie</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <main class="container">
+    <!-- Truyện mới cập nhật -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title"> <img src="components/images/cloud-computing.png" alt="logout" style="width: 30px; height: 30px; margin-right: 8px;">Truyện mới cập nhật</h2>
+      </div>
+      <div class="story-grid" id="new-stories-grid">
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <p>Đang tải truyện...</p>
+        </div>
+      </div>
+      <div class="pagination" id="new-stories-pagination"></div>
+    </section>
+
+    <!-- Truyện hoàn thành -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title"><img src="components/images/tick-mark.png" alt="logout" style="width: 30px; height: 30px; margin-right: 8px;">Truyện đã hoàn thành</h2>
+      </div>
+      <div class="story-grid" id="completed-stories-grid">
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+          <p>Đang tải truyện hoàn thành...</p>
+        </div>
+      </div>
+      <div class="pagination" id="completed-stories-pagination"></div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
